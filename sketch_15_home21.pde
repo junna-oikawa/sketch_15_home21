@@ -60,6 +60,8 @@ int y8speed = 20;
 int y9speed = 20;
 int y10speed = 20;
 
+int mode=1;
+
 
 int xPos, yPos;
 boolean inStopMode;
@@ -109,7 +111,7 @@ void draw(){
 
   
   
-  if( !inStopMode ){
+  if( mode == 0 ){
 //! = obstract    !inStopMode == false
     fill(0, 0, 0, 60);
   image(myImage, 0, 0);
@@ -141,15 +143,15 @@ void draw(){
   y7 += y7speed;
   
   if(y1 > 640 || y3 > 640 || y4 > 640 ||y6 > 640 || y7 > 640 ){
-    image(gameover, 0, 0);
+    mode = 2;
   }
   
   if( x2 >= hx && x2 <= hx + 50 && y2 >= 330 && y2 <=480 ){
-  image(gameover, 0, 0);  
+  mode = 2;
   }
   
   if( x5 >= hx && x5 <= hx +50 && y5  >= 330&& y5 <= 480){
-   image(gameover, 0, 0); 
+   mode = 2;
   }
   
   if(x1 >= hx && x1 <= hx + 50 && y1 >= 330  ){
@@ -174,25 +176,37 @@ void draw(){
   }
   
   if(y7 == -4000){
-   fill(random(255));
+  mode = 3;
+  }
+  }
+  
+  if( mode == 2){
+   image(gameover, 0, 0); 
+  
+  }
+
+
+  if( mode == 1 ){
+    image(start, 0, 0);
+  }
+  
+  if( mode == 3){
+   image(myImage, 0, 0);
+    fill(random(255));
    noStroke();
    rect(210 ,80 ,230, 80);
    image(clear, 220, 100);
-  }
-  }
-
-
-  if( inStopMode ){
-    image(start, 0, 0);
+   image(clear, 220, 100); 
+   image(hiyoko1, 300, 330);
   }
 }
 
 void eventsCalledFromControllWindow(String actionCommand){
   if(actionCommand.equals("startButton_Pushed")){ 
-   inStopMode = false; 
+   mode = 0;
   }
-  else if(actionCommand.equals("stopButton_Pushed")){
-   inStopMode = true;
+  else if(actionCommand.equals("stopButton_Pushed") ){
+   mode = 1;
   }
 }
 
