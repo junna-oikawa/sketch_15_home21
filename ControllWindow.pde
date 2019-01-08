@@ -3,9 +3,9 @@ class ControllWindow extends JFrame implements ActionListener{
   JTextField textField;
   JPanel panel;
   
-  sketch_15_home parentWindow;
+  sketch_15_home21 parentWindow;
   
-  ControllWindow(sketch_15_home parentWindow){
+  ControllWindow(sketch_15_home21 parentWindow){
     super("Control Window");
     this.parentWindow = parentWindow;
     this.setSize(320, 240);
